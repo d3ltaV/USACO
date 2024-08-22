@@ -1,0 +1,100 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    ifstream fin("sort.in");
+    ofstream fout("sort.out");
+
+    int n;
+    fin >> n;
+    vector<pair<int, int>> vec(n); 
+    for (int i = 0; i < n; i++) {
+        fin >> vec[i].first;
+        vec[i].second = i;
+    }
+    sort(vec.begin(), vec.end());
+
+    int max_moo_count = 0;
+
+//maximum number of moves any element made
+    for (int i = 0; i < n; i++) {
+        max_moo_count = max(max_moo_count, vec[i].second - i);
+    }
+    fout << max_moo_count + 1 << endl;
+    return 0;
+}
+
+// #include <iostream>
+// #include <fstream>
+// #include <vector>
+
+// using namespace std;
+
+// int main() {
+//     ifstream fin("sort.in");
+//     ofstream fout("sort.out");
+//     int n = 0;
+//     fin >> n;
+//     vector<int> vec(n);
+//     for (int i = 0; i < n; i++) {
+//         fin >> vec[i];
+//     }
+//     bool sorted = false;
+//     int count = 0;
+//     while (!sorted) {
+//         sorted = true;
+//         count++;
+//         for (int i = 0; i < n - 1; i++) {
+//             if (vec[i] > vec[i + 1]) {
+//                 // Swap elements
+//                 swap(vec[i], vec[i + 1]);
+//                 sorted = false;  // Indicate that the list is not yet sorted
+//             }
+//         }
+//     }
+//     fout << count;
+//     return 0;
+// }
+
+
+// // #include <iostream>
+// // #include <vector>
+
+// // using namespace std;
+
+// // int main() {
+// //     int n;
+// //     cin >> n;  // Read the number of elements
+// //     vector<int> vec(n);
+
+// //     // Read the elements into the vector
+// //     for (int i = 0; i < n; i++) {
+// //         cin >> vec[i];
+// //     }
+
+// //     bool sorted = false;
+// //     int count = 0;
+
+// //     // Perform a modified bubble sort and count the iterations
+// //     while (!sorted) {
+// //         sorted = true;
+// //         count++;
+// //         for (int i = 0; i < n - 1; i++) {
+// //             if (vec[i] > vec[i + 1]) {
+// //                 // Swap elements
+// //                 int temp = vec[i + 1];
+// //                 vec[i + 1] = vec[i];
+// //                 vec[i] = temp;
+// //                 sorted = false;
+// //             }
+// //         }
+// //     }
+
+// //     cout << count << endl;  // Output the number of passes
+
+// //     return 0;
+// // }
