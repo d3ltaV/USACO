@@ -1,3 +1,4 @@
+//Don't get into casework, use switch as shown below to compute for vert/horizontal.
 #include <cstdio>
 #include <iostream>
 #include <vector>
@@ -11,18 +12,15 @@ int n;
 ll ans = 0;
 vector<pair<int, int>> cows;
 
-/** returns the maximum area saved by testing splits along cows[i].first */
 ll search() {
 	sort(cows.begin(), cows.end());
 
 	vector<pair<int, int>> pref(n), suf(n);
 
-	// returns updated min/maxs when considering a new coordinate
 	auto upd = [](pair<int, int> a, int b) -> pair<int, int> {
 		return {min(a.first, b), max(a.second, b)};
 	};
 
-	// compute prefix/suffix minimums and maximums
 	pref[0] = {cows[0].second, cows[0].second};
 	for (int i = 1; i < n; ++i) { pref[i] = upd(pref[i - 1], cows[i].second); }
 
@@ -31,7 +29,6 @@ ll search() {
 		suf[i] = upd(suf[i + 1], cows[i].second);
 	}
 
-	// initial area with one enclosure
 	ll area = (ll)(cows.back().first - cows.front().first) *
 	          (pref.back().second - pref.back().first);
 
